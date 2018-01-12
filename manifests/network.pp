@@ -26,7 +26,9 @@
 #    bootp_file - A file to serve for servers booting from PXE
 #    bootp_server - Which server that file is served from
 #  $mac - A MAC for this network, if none is defined, libvirt will chose one for you
-#
+#  $trust_guest_rxfilters
+#    Enable the trustGuestRxFilters attribute on the network. Must be enabled to
+#    allow mulitcast traffic on tap devices. Defaults to false.
 # Sample Usage :
 #
 # $dhcp = {
@@ -68,17 +70,19 @@
 # }
 #
 define libvirt::network (
-  $ensure             = 'present',
-  $autostart          = false,
-  $bridge             = undef,
-  $forward_mode       = undef,
-  $forward_dev        = undef,
-  $forward_interfaces = [],
-  $ip                 = undef,
-  $ipv6               = undef,
-  $mac                = undef,
+  $ensure                = 'present',
+  $autostart             = false,
+  $bridge                = undef,
+  $forward_mode          = undef,
+  $forward_dev           = undef,
+  $forward_interfaces    = [],
+  $ip                    = undef,
+  $ipv6                  = undef,
+  $mac                   = undef,
+  $trust_guest_rxfilters = false,
 ) {
   validate_bool ($autostart)
+  validate_bool ($trust_guest_rxfilters)
   validate_re ($ensure, '^(present|defined|enabled|running|undefined|absent)$',
     'Ensure must be one of defined (present), enabled (running), or undefined (absent).')
 

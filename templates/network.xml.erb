@@ -1,4 +1,4 @@
-<network>
+<network<%- if @trust_guest_rxfilters -%>trustGuestRxFilters='yes'<%-end-%>>
   <name><%= @name -%></name>
   <%- if @mac -%>
   <mac address='<%= @mac -%>'/>
