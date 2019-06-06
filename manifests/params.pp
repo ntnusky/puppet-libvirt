@@ -30,7 +30,11 @@ class libvirt::params {
       case $::operatingsystem {
         'Ubuntu', 'LinuxMint': {
           $libvirt_service = 'libvirt-bin'
-          $unix_sock_group = 'libvirtd'
+          if versioncmp($::operatingsystemrelease, '16.04') > 0 {
+            $unix_sock_group = 'libvirt'
+          } else {
+            $unix_sock_group = 'libvirtd'
+          }
         }
         default: {
           $libvirt_service = 'libvirtd'
