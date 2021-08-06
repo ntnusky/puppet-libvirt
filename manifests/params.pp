@@ -28,12 +28,13 @@ class libvirt::params {
       $auth_unix_rw = 'none'
       case $::operatingsystem {
         'Ubuntu', 'LinuxMint': {
-          $libvirt_service = 'libvirt-bin'
           $unix_sock_group = 'libvirt'
           if versioncmp($::operatingsystemrelease, '20.04') >= 0 {
             $libvirt_package = 'libvirt-daemon-system'
+            $libvirt_service = 'libvirtd'
           } else {
             $libvirt_package = 'libvirt-bin'
+            $libvirt_service = 'libvirt-bin'
           }
         }
         default: {
