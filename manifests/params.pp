@@ -18,7 +18,6 @@ class libvirt::params {
       $deb_default = false
     }
     'Debian': {
-      $libvirt_package = 'libvirt-bin'
       $virtinst_package = 'virtinst'
       $radvd_package = 'radvd'
       $sysconfig = false
@@ -30,10 +29,11 @@ class libvirt::params {
       case $::operatingsystem {
         'Ubuntu', 'LinuxMint': {
           $libvirt_service = 'libvirt-bin'
-          if versioncmp($::operatingsystemrelease, '16.04') > 0 {
-            $unix_sock_group = 'libvirt'
+          $unix_sock_group = 'libvirt'
+          if versioncmp($::operatingsystemrelease, '20.04') >= 0 {
+            $libvirt_package = 'libvirt-daemon-system'
           } else {
-            $unix_sock_group = 'libvirtd'
+            $libvirt_package = 'libvirt-bin'
           }
         }
         default: {
