@@ -70,7 +70,8 @@
 # }
 #
 define libvirt::network (
-  $ensure                        = 'present',
+  Enum['present', 'defined', 'enabled', 'running', 'undefined', 'absent']
+          $ensure                = 'present',
   Boolean $autostart             = false,
   $bridge                        = undef,
   $forward_mode                  = undef,
@@ -81,9 +82,6 @@ define libvirt::network (
   $mac                           = undef,
   Boolean $trust_guest_rxfilters = false,
 ) {
-  validate_re ($ensure, '^(present|defined|enabled|running|undefined|absent)$',
-    'Ensure must be one of defined (present), enabled (running), or undefined (absent).')
-
   include ::libvirt::params
 
   Exec {
