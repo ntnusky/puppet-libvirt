@@ -70,19 +70,17 @@
 # }
 #
 define libvirt::network (
-  $ensure                = 'present',
-  $autostart             = false,
-  $bridge                = undef,
-  $forward_mode          = undef,
-  $forward_dev           = undef,
-  $forward_interfaces    = [],
-  $ip                    = undef,
-  $ipv6                  = undef,
-  $mac                   = undef,
-  $trust_guest_rxfilters = false,
+  $ensure                        = 'present',
+  Boolean $autostart             = false,
+  $bridge                        = undef,
+  $forward_mode                  = undef,
+  $forward_dev                   = undef,
+  $forward_interfaces            = [],
+  $ip                            = undef,
+  $ipv6                          = undef,
+  $mac                           = undef,
+  Boolean $trust_guest_rxfilters = false,
 ) {
-  validate_bool ($autostart)
-  validate_bool ($trust_guest_rxfilters)
   validate_re ($ensure, '^(present|defined|enabled|running|undefined|absent)$',
     'Ensure must be one of defined (present), enabled (running), or undefined (absent).')
 
