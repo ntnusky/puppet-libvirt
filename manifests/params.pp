@@ -7,7 +7,11 @@ class libvirt::params {
   case $::osfamily {
     'RedHat': {
       $libvirt_package = "libvirt.${::architecture}"
-      $libvirt_service = 'libvirtd'
+      if versioncmp($::operatingsystemmajrelease, '9') >= 0 {
+        $libvirt_service = 'virtqemud'
+      } else {
+        $libvirt_service = 'libvirtd'
+      }
       if versioncmp($::operatingsystemmajrelease, '7') >= 0 {
         $virtinst_package = 'virt-install'
       } else {
@@ -16,6 +20,10 @@ class libvirt::params {
       $radvd_package = 'radvd'
       $sysconfig = {}
       $deb_default = false
+      $auth_unix_ro = false
+      $unix_sock_rw_perms = false
+      $auth_unix_rw = false
+      $unix_sock_group = false
     }
     'Debian': {
       $virtinst_package = 'virtinst'
@@ -50,6 +58,10 @@ class libvirt::params {
       $radvd_package = 'radvd'
       $sysconfig = false
       $deb_default = false
+      $auth_unix_ro = false
+      $unix_sock_rw_perms = false
+      $auth_unix_rw = false
+      $unix_sock_group = false
     }
   }
 
