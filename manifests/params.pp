@@ -37,7 +37,7 @@ class libvirt::params {
       case $facts['os']['name'] {
         'Ubuntu', 'LinuxMint': {
           $unix_sock_group = 'libvirt'
-          if versioncmp($::operatingsystemrelease, '20.04') >= 0 {
+          if versioncmp($::facts['os']['release']['full'], '20.04') >= 0 {
             $libvirt_package = 'libvirt-daemon-system'
             $libvirt_service = 'libvirtd'
           } else {
