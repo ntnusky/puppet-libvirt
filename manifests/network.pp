@@ -82,6 +82,7 @@ define libvirt::network (
   $mac                           = undef,
   Boolean $trust_guest_rxfilters = false,
 ) {
+
   include ::libvirt::params
 
   Exec {
@@ -145,7 +146,7 @@ define libvirt::network (
       }
     }
     default : {
-      fail ("${module_name} This default case should never be reached in Libvirt::Network{'${title}':} on node ${::fqdn}.")
+      fail ("${module_name} This default case should never be reached in Libvirt::Network{'${title}':} on node ${facts['networking']['fqdn']}.")
     }
   }
 }

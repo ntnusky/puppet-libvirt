@@ -1,3 +1,10 @@
+#### 2025-02-04 - 1.0.3
+* Remove legacy facts usage.
+* Remove obsolete validate functions.
+
+#### 2022-11-15 - 1.0.2
+* Add support for RHEL9.
+
 #### 2021-06-30 - 1.0.1
 * Add support for Linux Mint (#55, @ssaki).
 * Add support for RHEL8 with templates as close to the original as possible.
